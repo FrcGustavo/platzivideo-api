@@ -1,9 +1,15 @@
 const express = require('express');
 const app = express();
 
+// Dependencies
+const morgan = require('morgan');
+const helmet = require('helmet');
+
+// Config and Routes
 const { config } = require('./config/index');
 const moviesApi = require('./routes/movies');
 
+// Middlewares
 const {
     logErrors,
     wrapErrors,
@@ -12,12 +18,19 @@ const {
 
 const notFoundHandler = require('./utils/middleware/notFoundHandler');
 
-// body parser
+// Helmet
+app.use(helmet());
+
+// body-parser by express
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+// Morgan
+app.use(morgan('dev'));
 
 moviesApi(app);
 
-// catch 404
+// Catch 404
 app.use(notFoundHandler);
 
 // Errors Middlewares
