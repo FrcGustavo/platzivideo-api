@@ -8,6 +8,7 @@ const helmet = require('helmet');
 // Config and Routes
 const { config } = require('./config/index');
 const moviesApi = require('./routes/movies');
+const userMoviesApi = require('./routes/userMovies');
 
 // Middlewares
 const {
@@ -29,6 +30,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(morgan('dev'));
 
 moviesApi(app);
+userMoviesApi(app);
 
 // Catch 404
 app.use(notFoundHandler);
