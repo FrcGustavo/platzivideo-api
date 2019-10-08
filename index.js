@@ -9,6 +9,7 @@ const helmet = require('helmet');
 const { config } = require('./config/index');
 const moviesApi = require('./routes/movies');
 const userMoviesApi = require('./routes/userMovies');
+const authApi = require('./routes/auth');
 
 // Middlewares
 const {
@@ -31,6 +32,7 @@ app.use(morgan('dev'));
 
 moviesApi(app);
 userMoviesApi(app);
+authApi(app);
 
 // Catch 404
 app.use(notFoundHandler);
