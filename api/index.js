@@ -20,12 +20,11 @@ const {
 
 const notFoundHandler = require('./utils/middleware/notFoundHandler');
 
-// Helmet
-app.use(helmet());
-
 // body-parser by express
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+// Helmet
+app.use(helmet());
 
 // Morgan
 app.use(morgan('dev'));
