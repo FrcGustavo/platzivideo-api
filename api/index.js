@@ -8,6 +8,8 @@ const helmet = require('helmet');
 // Config and Routes
 const { config } = require('./config/index');
 const moviesApi = require('./routes/movies');
+const userMoviesApi = require('./routes/userMovies');
+const authApi = require('./routes/auth');
 
 // Middlewares
 const {
@@ -18,17 +20,18 @@ const {
 
 const notFoundHandler = require('./utils/middleware/notFoundHandler');
 
-// Helmet
-app.use(helmet());
-
 // body-parser by express
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+// Helmet
+app.use(helmet());
 
 // Morgan
 app.use(morgan('dev'));
 
 moviesApi(app);
+userMoviesApi(app);
+authApi(app);
 
 // Catch 404
 app.use(notFoundHandler);
